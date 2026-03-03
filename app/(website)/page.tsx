@@ -2,13 +2,12 @@ import { Advertisements } from '@/components/Home/Advertisements'
 import { AgentsSection } from '@/components/Home/AgentsSection'
 import { BrowsePurpose } from '@/components/Home/BrowsePurpose'
 import { FeaturedProperties } from '@/components/Home/FeaturedProperties'
-import { Footer } from '@/components/Home/Footer'
 import { HeroSection } from '@/components/Home/HeroSection'
-import { LocationExplorer } from '@/components/Home/LocationExplorer'
-import { Navbar } from '@/components/Home/Navbar'
 import { SearchFilter } from '@/components/Home/SearchFilter'
-import { WhyChoose } from '@/components/Home/WhyChoose'
+import { ExploreByLocation } from '@/components/Home/ExploreByLocation'
 import type { Metadata } from 'next'
+import { WhyChoosePlatform } from '@/components/Home/WhyChoosePlatform'
+import { DreamHomeCTA } from '@/components/Home/DreamHomeCTA'
 
 
 export const metadata: Metadata = {
@@ -19,16 +18,17 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main className="min-h-screen bg-white">
-      <Navbar/>
+     
       <HeroSection />
       <SearchFilter />
       <FeaturedProperties/>
       <BrowsePurpose />
-      <WhyChoose/>
-      <Advertisements/>
+      <ExploreByLocation/>
       <AgentsSection />
-      <LocationExplorer />
-      <Footer/>
+      <Advertisements/>
+      <WhyChoosePlatform/>
+      <DreamHomeCTA/>
+    
     </main>
   )
 }
