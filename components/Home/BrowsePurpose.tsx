@@ -1,90 +1,100 @@
-import Image from 'next/image';
-import { Home, Building2, ArrowRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import Image from "next/image";
+import { Home, Building2, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export function BrowsePurpose() {
   return (
-    <section className="py-16 md:py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-12 text-center">
-          <h2 className="text-balance text-3xl font-bold text-foreground md:text-4xl">
-            Browse <span className="text-accent">by Purpose</span>
+    <section className="py-20 bg-[#F8F9FB]">
+      <div className="mx-auto container px-4 sm:px-6 lg:px-8">
+        {/* Heading */}
+        <div className="text-center mb-14">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#0B1C39]">
+            Browse <span className="text-[#D3920E]">by</span> Purpose
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground">
-            Whether you&apos;re looking to buy your dream home or find the perfect rental, we&apos;ve got you covered
+          <p className="mt-4 text-[#6C6C6C]">
+            Whether you&apos;`re looking to buy your dream home or find the perfect rental, we&apos;`ve got you covered
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2">
-          {/* Buy Properties Card */}
-          <div className="group relative overflow-hidden rounded-2xl bg-card shadow-md transition-transform hover:shadow-lg">
-            <div className="relative h-64 w-full md:h-72">
-              <Image
-                src="/buy-property.jpg"
-                alt="Buy Properties"
-                fill
-                className="object-cover transition-transform group-hover:scale-105"
-              />
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-            </div>
+        {/* Cards */}
+        <div className="grid md:grid-cols-2 gap-6">
+          
+          {/* Buy Card */}
+          <div className="relative h-[460px] rounded-2xl overflow-hidden group">
+            {/* Background Image */}
+            <Image
+              src="/browse1.jpg"
+              alt="Buy Properties"
+              fill
+              priority
+              className="object-cover group-hover:scale-105 transition duration-500"
+            />
+
+            {/* Dark Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#061F3D]/80 via-[#061F3D]/40 to-transparent" />
 
             {/* Content */}
-            <div className="relative -mt-32 flex flex-col justify-between px-6 pb-6 pt-32 text-white">
+            <div className="absolute inset-0 flex flex-col justify-between p-8 text-white">
               <div>
-                <div className="mb-3 inline-flex rounded-full bg-white/20 p-2 backdrop-blur-sm">
-                  <Home className="h-6 w-6" />
+                <div className="mb-6 inline-flex items-center justify-center w-12 h-12 rounded-lg bg-white/20 backdrop-blur-md">
+                  <Home className="w-6 h-6" />
                 </div>
-                <h3 className="text-2xl font-bold">Buy Properties</h3>
-                <p className="mt-2 text-sm text-white/90">
+
+                <h3 className="text-2xl font-semibold mb-3">
+                  Buy Properties
+                </h3>
+
+                <p className="max-w-sm text-white/90">
                   Explore over 5,000+ properties for sale across Kenya. From apartments to luxury villas.
                 </p>
               </div>
 
-              <Button
-                variant="ghost"
-                className="mt-6 justify-start text-accent hover:text-accent/90 hover:bg-transparent pl-0"
-              >
-                Browse Buy Listings
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
+              {/* Button */}
+              <div>
+                <Button className="w-[500px] bg-white text-[#D3920E] hover:bg-white/90 rounded-full h-14 text-base font-medium flex items-center justify-between px-6">
+                  Browse Buy Listings
+                  <ArrowRight className="w-5 h-5" />
+                </Button>
+              </div>
             </div>
           </div>
 
-          {/* Rent Properties Card */}
-          <div className="group relative overflow-hidden rounded-2xl bg-card shadow-md transition-transform hover:shadow-lg">
-            <div className="relative h-64 w-full md:h-72">
-              <Image
-                src="/rent-property.jpg"
-                alt="Rent Properties"
-                fill
-                className="object-cover transition-transform group-hover:scale-105"
-              />
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-            </div>
+          {/* Rent Card */}
+          <div className="relative h-[460px] rounded-2xl overflow-hidden group">
+            <Image
+              src="/browse2.jpg"
+              alt="Rent Properties"
+              fill
+              priority
+              className="object-cover group-hover:scale-105 transition duration-500"
+            />
 
-            {/* Content */}
-            <div className="relative -mt-32 flex flex-col justify-between px-6 pb-6 pt-32 text-white">
+            <div className="absolute inset-0 bg-gradient-to-t from-[#061F3D]/80 via-[#061F3D]/40 to-transparent" />
+
+            <div className="absolute inset-0 flex flex-col justify-between p-8 text-white">
               <div>
-                <div className="mb-3 inline-flex rounded-full bg-white/20 p-2 backdrop-blur-sm">
-                  <Building2 className="h-6 w-6" />
+                <div className="mb-6 inline-flex items-center justify-center w-12 h-12 rounded-lg bg-white/20 backdrop-blur-md">
+                  <Building2 className="w-6 h-6" />
                 </div>
-                <h3 className="text-2xl font-bold">Rent Properties</h3>
-                <p className="mt-2 text-sm text-white/90">
+
+                <h3 className="text-2xl font-semibold mb-3">
+                  Rent Properties
+                </h3>
+
+                <p className="max-w-sm text-white/90">
                   Find your perfect rental home from 3,000+ verified listings. Apartments, houses, and more.
                 </p>
               </div>
 
-              <Button
-                variant="ghost"
-                className="mt-6 justify-start text-accent hover:text-accent/90 hover:bg-transparent pl-0"
-              >
-                Browse Rent Listings
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
+              <div>
+                <Button className="w-[500px] bg-white text-[#D3920E] hover:bg-white/90 rounded-full h-14 text-base font-medium flex items-center justify-between px-6">
+                  Browse Rent Listings
+                  <ArrowRight className="w-5 h-5" />
+                </Button>
+              </div>
             </div>
           </div>
+
         </div>
       </div>
     </section>
