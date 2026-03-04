@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Heart, Bed, Bath } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 interface PropertyCardProps {
   image: string;
@@ -118,10 +119,11 @@ export function PropertyCard({
         <p className="mt-4 text-[15px] font-medium text-[#2E353A]">
           {tagline}
         </p>
-
+        <Link href={`/property-buy/1`}>
         <Button className="mt-5 h-12 w-full rounded-full bg-[#0B2B4B] text-white hover:bg-[#0B2B4B]/90">
           View Details
         </Button>
+        </Link>
       </div>
     </div>
   );
