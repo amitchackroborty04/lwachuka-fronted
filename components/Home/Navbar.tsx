@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { usePathname } from 'next/navigation';
 import {
   Sheet,
   SheetContent,
@@ -15,14 +16,20 @@ import Image from 'next/image';
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
 
   const navLinks = [
-    { href: '#', label: 'Home' },
-    { href: '#', label: 'Properties' },
-    { href: '#', label: 'About us' },
-    { href: '#', label: 'Agents & Vendors' },
-    { href: '#', label: 'Contact us' },
+    { href: '/', label: 'Home' },
+    { href: '/properties', label: 'Properties' },
+    { href: '/about-us', label: 'About us' },
+    { href: '/agent&vendor', label: 'Agents & Vendors' },
+    { href: '/contact-us', label: 'Contact us' },
   ];
+  const isActive = (href: string) => {
+    if (href === '#') return false;
+    if (href === '/') return pathname === '/';
+    return pathname === href || pathname.startsWith(`${href}/`);
+  };
 
   return (
     <nav className="sticky top-0 z-40 w-full  bg-white">
@@ -39,7 +46,11 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-base font-semibold text-[#1E1E1E] transition-colors hover:text-primary"
+                className={`inline-flex h-[40px] items-center rounded-full px-4 text-base font-semibold transition-colors ${
+                  isActive(link.href)
+                    ? 'bg-[#061F3D] text-white hover:text-white'
+                    : 'text-[#1E1E1E] hover:text-primary'
+                }`}
               >
                 {link.label}
               </Link>
@@ -60,7 +71,7 @@ export function Navbar() {
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild className="md:hidden">
               <Button variant="ghost" size="sm">
-                <Menu className="h-5 w-5" />
+                <Menu className="!h-5 !w-5" />
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-[300px]">
