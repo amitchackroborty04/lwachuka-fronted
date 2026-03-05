@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Heart, Bed, Bath } from "lucide-react";
+import {  Bed, Bath } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
@@ -50,13 +50,13 @@ export function PropertyCard({
         </div>
 
         {/* Heart */}
-        <button
+        {/* <button
           type="button"
           aria-label="Add to wishlist"
           className="absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-full bg-white/95 shadow"
         >
           <Heart className="h-5 w-5 text-[#0B2B4B]" />
-        </button>
+        </button> */}
       </div>
 
       {/* Body */}
