@@ -3,27 +3,27 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { Menu, X, UsersRound, UserCheck, Store, Building2, Megaphone, Banknote, BellDot, CreditCard, ChartColumn, Shield, Settings } from "lucide-react";
+import { Menu, X,Megaphone,CreditCard,Settings } from "lucide-react";
 import { useState } from "react";
 import Image from "next/image";
 import { LogoutModal } from "./LogoutModal";
 
 const navigation = [
 //   { name: "Dashboard Overview", href: "/", icon: LayoutDashboard },
-  {
-    name: "User Management",
-    href: "/user-management", 
-    icon: UsersRound ,
-  },
-  { name: "Agent Management", href: "/agent-management", icon: UserCheck },
-  { name: "Vendor Management", href: "/vendor-management", icon: Store  },
-  { name: "Property Listings", href: "/property-listings", icon: Building2 },
+  // {
+  //   name: "User Management",
+  //   href: "/user-management", 
+  //   icon: UsersRound ,
+  // },
+  // { name: "Agent Management", href: "/agent-management", icon: UserCheck },
+  // { name: "Vendor Management", href: "/vendor-management", icon: Store  },
+  // { name: "Property Listings", href: "/property-listings", icon: Building2 },
   { name: "Advertisements", href: "/advertisements", icon: Megaphone },
-  { name: "Paid Listing", href: "/paid-listings", icon: Banknote },
-  { name: "Subscription Management", href: "/subscription-management", icon: BellDot },
+  // { name: "Paid Listing", href: "/paid-listings", icon: Banknote },
+  // { name: "Subscription Management", href: "/subscription-management", icon: BellDot },
   { name: "Billing & Payments", href: "/billing-payments", icon: CreditCard },
-  { name: "Analytics & Reports", href: "/analytics-reports", icon: ChartColumn },
-  { name: "Security & Audit Logs", href: "/security-audit", icon: Shield },
+  // { name: "Analytics & Reports", href: "/analytics-reports", icon: ChartColumn },
+  // { name: "Security & Audit Logs", href: "/security-audit", icon: Shield },
   { name: "Settings", href: "/settings", icon: Settings },
 
 ];

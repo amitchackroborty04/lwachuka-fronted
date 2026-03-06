@@ -11,6 +11,9 @@ import {
 } from "@/components/ui/table";
 import Image from "next/image";
 import Header from "../../_components/Header";
+import { Button } from "@/components/ui/button";
+import { Plus } from "lucide-react";
+import Link from "next/link";
 
 type Status = "Active" | "Paused" | "Expired";
 
@@ -178,6 +181,14 @@ export default function AdvertisementManagement() {
     <div>
       <Header title="Advertisements" subtitle="Review the advertising plans" />
       <div className="p-6">
+        <div className="flex items-center justify-end mb-6">
+          <Link href="/advertisements/add-advertisement">
+            <Button className="flex items-center gap-2">
+              <Plus className="h-4 w-4" />
+              Create New Ad
+            </Button>
+          </Link>
+        </div>
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
           <Table>
             <TableHeader>
@@ -255,7 +266,6 @@ export default function AdvertisementManagement() {
                       >
                         <Eye size={14} />
                       </Button> */}
-
                     </div>
                   </TableCell>
                 </TableRow>
