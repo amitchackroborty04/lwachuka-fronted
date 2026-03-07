@@ -1,3 +1,5 @@
+"use client";
+
 import {
   BedDouble,
   Bath,
@@ -21,6 +23,7 @@ import {
   Bus,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import ContactModal from "./ContactModal";
 
 /* ---------------- DUMMY DATA ---------------- */
 
@@ -51,35 +54,58 @@ const amenities = [
 ];
 
 const infoRows = [
-  { leftLabel: "Type", leftValue: "Modern 3-Bedroom Apartment in Westland’s", rightLabel: "Added on", rightValue: "16 January 2026" },
-  { leftLabel: "Purpose", leftValue: "For Sale", rightLabel: "Original price", rightValue: "KSH 100,000" },
-  { leftLabel: "Reference no.", leftValue: "748596", rightLabel: "Handover date", rightValue: "16 January 2026" },
-  { leftLabel: "Furnishing", leftValue: "Unfurnished", rightLabel: "Completion", rightValue: "Off-Plan" },
+  {
+    leftLabel: "Type",
+    leftValue: "Modern 3-Bedroom Apartment in Westland’s",
+    rightLabel: "Added on",
+    rightValue: "16 January 2026",
+  },
+  {
+    leftLabel: "Purpose",
+    leftValue: "For Sale",
+    rightLabel: "Original price",
+    rightValue: "KSH 100,000",
+  },
+  {
+    leftLabel: "Reference no.",
+    leftValue: "748596",
+    rightLabel: "Handover date",
+    rightValue: "16 January 2026",
+  },
+  {
+    leftLabel: "Furnishing",
+    leftValue: "Unfurnished",
+    rightLabel: "Completion",
+    rightValue: "Off-Plan",
+  },
 ];
 
 /* ---------------- COMPONENT ---------------- */
 
 export function PropertyExtrasSection() {
   return (
-    <section className="py-14 md:py-20 bg-white">
-      <div className="mx-auto container px-4 sm:px-6 lg:px-8">
+    <section className="bg-white py-14 md:py-20">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Key Property Highlights */}
         <div>
-          <h2 className="text-[32px]  font-bold text-[#0B1C39]">
+          <h2 className="text-[32px] font-bold text-[#0B1C39]">
             Key <span className="text-[#D3920E]">Property Highlights</span>
           </h2>
-          <p className="mt-2 text-sm text-[#8A8A8A] max-w-3xl">
-            A thoughtfully designed property offering modern features, quality finishes, and a comfortable living experience in a prime location.
+          <p className="mt-2 max-w-3xl text-sm text-[#8A8A8A]">
+            A thoughtfully designed property offering modern features, quality
+            finishes, and a comfortable living experience in a prime location.
           </p>
 
-          <div className="mt-6 grid gap-y-4 gap-x-6 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="mt-6 grid gap-x-6 gap-y-4 sm:grid-cols-2 lg:grid-cols-5">
             {highlights.map((item) => {
               const Icon = item.icon;
+
               return (
-                <div key={item.label} className="flex items-center gap-2 text-sm text-[#0B1C39]">
-                  <span className="">
-                    <Icon className="h-4 w-4 text-[#D3920E]" />
-                  </span>
+                <div
+                  key={item.label}
+                  className="flex items-center gap-2 text-sm text-[#0B1C39]"
+                >
+                  <Icon className="h-4 w-4 text-[#D3920E]" />
                   <span className="text-[#2B2B2B]">{item.label}</span>
                 </div>
               );
@@ -90,15 +116,18 @@ export function PropertyExtrasSection() {
         {/* Property & Community Amenities */}
         <div className="mt-14">
           <h2 className="text-[32px] font-bold text-[#0B1C39]">
-            Property & <span className="text-[#D3920E]">Community Amenities</span>
+            Property &{" "}
+            <span className="text-[#D3920E]">Community Amenities</span>
           </h2>
-          <p className="mt-2 text-sm text-[#8A8A8A] max-w-3xl">
-            A range of modern facilities and conveniences designed to enhance everyday living and provide comfort, safety, and convenience.
+          <p className="mt-2 max-w-3xl text-sm text-[#8A8A8A]">
+            A range of modern facilities and conveniences designed to enhance
+            everyday living and provide comfort, safety, and convenience.
           </p>
 
           <div className="mt-6 flex flex-wrap gap-3">
             {amenities.map((item) => {
               const Icon = item.icon;
+
               return (
                 <div
                   key={item.label}
@@ -119,37 +148,29 @@ export function PropertyExtrasSection() {
           </h2>
 
           <div className="mt-6 overflow-hidden rounded-xl border border-[#EDEDED] bg-white">
-            {/* Table Header (desktop) */}
-            <div className="hidden md:grid md:grid-cols-4 bg-[#FAFAFA] border-b border-[#EDEDED] text-xs font-semibold text-[#6F6F6F]">
-              <div className="px-6 py-4"> </div>
-              <div className="px-6 py-4"> </div>
-              <div className="px-6 py-4"> </div>
-              <div className="px-6 py-4"> </div>
+            <div className="hidden border-b border-[#EDEDED] bg-[#FAFAFA] text-xs font-semibold text-[#6F6F6F] md:grid md:grid-cols-4">
+              <div className="px-6 py-4"></div>
+              <div className="px-6 py-4"></div>
+              <div className="px-6 py-4"></div>
+              <div className="px-6 py-4"></div>
             </div>
 
-            {/* Rows */}
             <div className="divide-y divide-[#F0F0F0]">
               {infoRows.map((row, idx) => (
                 <div
                   key={idx}
-                  className="grid grid-cols-1 md:grid-cols-4 gap-3 md:gap-0 px-4 sm:px-6 py-5"
+                  className="grid grid-cols-1 gap-3 px-4 py-5 sm:px-6 md:grid-cols-4 md:gap-0"
                 >
-                  {/* Left label */}
                   <div className="text-xs font-semibold text-[#0B1C39]">
                     {row.leftLabel}
                   </div>
 
-                  {/* Left value */}
-                  <div className="text-sm text-[#6F6F6F]">
-                    {row.leftValue}
-                  </div>
+                  <div className="text-sm text-[#6F6F6F]">{row.leftValue}</div>
 
-                  {/* Right label */}
                   <div className="text-xs font-semibold text-[#0B1C39]">
                     {row.rightLabel}
                   </div>
 
-                  {/* Right value */}
                   <div className="text-sm text-[#6F6F6F] md:text-right">
                     {row.rightValue}
                   </div>
@@ -158,11 +179,14 @@ export function PropertyExtrasSection() {
             </div>
           </div>
 
-          {/* Button */}
           <div className="mt-10 flex justify-center">
-            <Button className="h-10 px-10 rounded-md bg-[#B78222] hover:bg-[#9f6f1d] text-white">
-              Contact Now
-            </Button>
+            <ContactModal
+              trigger={
+                <Button className="h-10 rounded-md bg-[#B78222] px-10 text-white hover:bg-[#9f6f1d]">
+                  Contact Now
+                </Button>
+              }
+            />
           </div>
         </div>
       </div>
