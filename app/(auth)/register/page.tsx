@@ -64,8 +64,9 @@ export default function RegisterPage() {
             } else {
                 setError(res.data.message || "Registration failed");
             }
-        } catch (err: any) {
-            setError(err?.response?.data?.message || err.message || "An unexpected error occurred. Please try again.");
+        } catch (err) {
+            const message = err instanceof Error ? err.message : "An unexpected error occurred. Please try again.";
+            setError(message);
         } finally {
             setIsLoading(false);
         }
