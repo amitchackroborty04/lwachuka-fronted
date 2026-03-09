@@ -22,7 +22,7 @@ export function LogoutModal() {
     try {
       // NextAuth sign out
       await signOut({ redirect: false }); // redirect false মানে আমরা নিজে redirect করবো
-      router.push("/signin"); // লগআউট হলে login page এ redirect
+      router.push("/login"); // লগআউট হলে login page এ redirect
     } catch (error) {
       console.error("Logout failed:", error);
     }
