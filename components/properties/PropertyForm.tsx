@@ -186,7 +186,7 @@ export function PropertyForm({ mode, propertyId, initialData, onSuccess }: Prope
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-10 pb-20">
             {/* Section 1: Basic Information */}
             <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm space-y-6">
-                <h3 className="text-xl font-bold text-gray-900 border-b border-gray-100 pb-4">Basic Information</h3>
+                <h3 className="text-base font-semibold leading-[150%] text-gray-900 border-b border-gray-100 pb-4">Basic Information</h3>
                 <div className="space-y-4">
                     <div className="space-y-2">
                         <Label>Property Title</Label>
@@ -234,7 +234,7 @@ export function PropertyForm({ mode, propertyId, initialData, onSuccess }: Prope
 
             {/* Section 2: Property Details */}
             <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm space-y-6">
-                <h3 className="text-xl font-bold text-gray-900 border-b border-gray-100 pb-4">Property Details</h3>
+                <h3 className="text-base font-semibold leading-[150%] text-gray-900 border-b border-gray-100 pb-4">Property Details</h3>
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                     <div className="space-y-2">
                         <Label>Bedrooms</Label>
@@ -265,7 +265,7 @@ export function PropertyForm({ mode, propertyId, initialData, onSuccess }: Prope
 
             {/* Section 3: Key Property Highlights */}
             <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm space-y-6">
-                <h3 className="text-xl font-bold text-gray-900 border-b border-gray-100 pb-4">Key Property Highlights</h3>
+                <h3 className="text-base font-semibold leading-[150%] text-gray-900 border-b border-gray-100 pb-4">Key Property Highlights</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
                     <div className="space-y-2">
                         <Label>Bedrooms</Label>
@@ -312,7 +312,7 @@ export function PropertyForm({ mode, propertyId, initialData, onSuccess }: Prope
 
             {/* Section 4: Property & Community Amenities */}
             <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm space-y-6">
-                <h3 className="text-xl font-bold text-gray-900 border-b border-gray-100 pb-4">Property & Community Amenities</h3>
+                <h3 className="text-base font-semibold leading-[150%] text-gray-900 border-b border-gray-100 pb-4">Property & Community Amenities</h3>
                 <AmenitiesChecklist
                     selected={selectedAmenities}
                     onChange={setSelectedAmenities}
@@ -321,7 +321,7 @@ export function PropertyForm({ mode, propertyId, initialData, onSuccess }: Prope
 
             {/* Section 5: Property Information */}
             <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm space-y-6">
-                <h3 className="text-xl font-bold text-gray-900 border-b border-gray-100 pb-4">Property Information</h3>
+                <h3 className="text-base font-semibold leading-[150%] text-gray-900 border-b border-gray-100 pb-4">Property Information</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
                     <div className="space-y-2">
                         <Label>Purpose</Label>
@@ -352,7 +352,7 @@ export function PropertyForm({ mode, propertyId, initialData, onSuccess }: Prope
 
             {/* Section 6: Location & Price */}
             <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm space-y-6">
-                <h3 className="text-xl font-bold text-gray-900 border-b border-gray-100 pb-4">Location & Price</h3>
+                <h3 className="text-base font-semibold leading-[150%] text-gray-900 border-b border-gray-100 pb-4">Location & Price</h3>
                 <div className="space-y-6">
                     <div className="space-y-2">
                         <Label>Location</Label>
@@ -375,7 +375,7 @@ export function PropertyForm({ mode, propertyId, initialData, onSuccess }: Prope
 
             {/* Section 7: Property Images */}
             <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm space-y-6">
-                <h3 className="text-xl font-bold text-gray-900 border-b border-gray-100 pb-4">Property Images</h3>
+                <h3 className="text-base font-semibold leading-[150%] text-gray-900 border-b border-gray-100 pb-4">Property Images</h3>
                 <PropertyImageUpload
                     existingImages={existingImages}
                     newImages={newImages}
