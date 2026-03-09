@@ -1,9 +1,10 @@
 'use client'
 
-import { useState } from 'react'
-import { useParams } from 'next/navigation'
-import { toast } from 'sonner'
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
+import { useState } from "react";
+import { useParams } from "next/navigation";
+import { toast } from "sonner";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { useSession } from "next-auth/react";
 
 interface ContactModalProps {
   trigger?: React.ReactNode
@@ -13,10 +14,12 @@ export default function ContactModal({ trigger }: ContactModalProps) {
   const [open, setOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState({
-    email: '',
-    phoneNumber: '',
-    message: '',
-  })
+    email: "",
+    phoneNumber: "",
+    message: "",
+  });
+const session=useSession()
+const token=session.data?.user?.accessToken
 
   const params = useParams()
   const propertyId = Array.isArray(params?.id) ? params?.id[0] : params?.id
@@ -46,8 +49,7 @@ export default function ContactModal({ trigger }: ContactModalProps) {
 
     setIsLoading(true)
 
-    const token =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5OTZiZjRhNDA1Y2MxYThjNDU4YTM1ZiIsImVtYWlsIjoidXNlckBnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTc3Mjk2ODM4NSwiZXhwIjoxNzczNTczMTg1fQ.bZoc3EWCqSjA1abkwRIAf7Vo-MGltLo_kQxAEiUbS2o'
+    
 
     try {
       const response = await fetch(
@@ -72,10 +74,10 @@ export default function ContactModal({ trigger }: ContactModalProps) {
         throw new Error(result.message || 'Failed to send message')
       }
 
-      toast.success('Message sent successfully!')
-      setFormData({ email: '', phoneNumber: '', message: '' })
-      setOpen(false)
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      toast.success("Message sent successfully!");
+      setFormData({ email: "", phoneNumber: "", message: "" });
+      setOpen(false);
+      //eslint-disable-next-line
     } catch (err: any) {
       toast.error(err.message || 'Failed to send message. Please try again.')
       console.error(err)

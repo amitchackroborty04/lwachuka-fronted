@@ -7,16 +7,10 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 
 export function HeroSection() {
-  const thumbs = ['/house.png', '/galary.png', '/galary2.png', '/galary3.png']
-  const pages = thumbs.map((_, idx) => idx + 1)
-  const [activeIndex, setActiveIndex] = useState(0)
+  const thumbs = ['/house.png', '/galary.png', '/galary2.png', '/galary3.png'];
+  const pages = thumbs.map((_, idx) => idx + 1);
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  const avatars = [
-    '/avater2.png',
-    '/avater2.png',
-    '/avater3.png',
-    '/avater4.png',
-  ]
 
   return (
     <section className="bg-white">
