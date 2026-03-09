@@ -1,6 +1,3 @@
-
-
-
 'use client'
 import {
   CalendarDays,
@@ -51,7 +48,7 @@ function StatCard({ title, value, icon }: StatCardProps) {
 
 function StatCardSkeleton() {
   return (
-    <div className="rounded-xl border border-[#EDF1F5] bg-white p-4 shadow-[0_4px_14px_rgba(15,23,42,0.06)] animate-pulse">
+    <div className="animate-pulse rounded-xl border border-[#EDF1F5] bg-white p-4 shadow-[0_4px_14px_rgba(15,23,42,0.06)]">
       <div className="flex items-start justify-between gap-3">
         <div>
           <div className="h-8 w-16 rounded bg-gray-200"></div>
@@ -78,16 +75,17 @@ function QuickActionButton({ title, icon, onClick }: ActionItem) {
 
 function QuickActionSkeleton() {
   return (
-    <div className="h-10 rounded-md border border-gray-200 bg-gray-100 animate-pulse" />
+    <div className="h-10 animate-pulse rounded-md border border-gray-200 bg-gray-100" />
   )
 }
 
 export default function UserDashboardOverview() {
   const { data: session } = useSession()
   const token = session?.user?.accessToken
+  const currentYear = new Date().getFullYear()
 
   const { data: overviewData, isLoading } = useQuery({
-    queryKey: dashboardKeys.userOverview(),
+    queryKey: dashboardKeys.overview(currentYear),
     queryFn: () => getUserOverview(token),
     enabled: !!token,
   })
@@ -110,7 +108,6 @@ export default function UserDashboardOverview() {
     },
   ]
 
-  // Keep your original recent activity & quick actions (static for now)
   const recentActivity: ActivityItem[] = [
     {
       title: 'Saved property for 3 Bedroom Apartment in Kilimani',
@@ -160,7 +157,6 @@ export default function UserDashboardOverview() {
         </div>
 
         <div className="mt-5 grid grid-cols-1 gap-4 lg:grid-cols-[2fr_1fr]">
-          {/* Recent Activity - kept static for now */}
           <div className="rounded-xl border border-[#EDF1F5] bg-white p-4 shadow-[0_4px_14px_rgba(15,23,42,0.06)]">
             <h2 className="text-[24px] font-normal text-[#181818]">
               Recent Activity
@@ -180,19 +176,23 @@ export default function UserDashboardOverview() {
             </div>
           </div>
 
-          {/* Quick Actions */}
           <div className="rounded-xl border border-[#EDF1F5] bg-white p-4 shadow-[0_4px_14px_rgba(15,23,42,0.06)]">
             <h2 className="text-[16px] font-semibold text-[#1F2A37]">
               Quick Actions
             </h2>
             <div className="mt-3 space-y-3">
-              {quickActions.map(item => (
-                <QuickActionButton
-                  key={item.title}
-                  title={item.title}
-                  icon={item.icon}
-                />
-              ))}
+              {isLoading
+                ? Array(3)
+                    .fill(0)
+                    .map((_, i) => <QuickActionSkeleton key={i} />)
+                : quickActions.map(item => (
+                    <QuickActionButton
+                      key={item.title}
+                      title={item.title}
+                      icon={item.icon}
+                      onClick={item.onClick}
+                    />
+                  ))}
             </div>
           </div>
         </div>
