@@ -13,3 +13,16 @@ export const getAgentOverview = async (year: number, token?: string): Promise<Da
     });
     return response.data;
 };
+
+export interface UserDashboardOverviewData {
+    savedProperties: number;
+    upcommingSiteVisit: number;
+    totalInquiries: number;
+}
+
+export const getUserOverview = async (token?: string): Promise<{ data: UserDashboardOverviewData }> => {
+    const response = await api.get("/dashboard/user-overview", {
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+    });
+    return response.data;
+};

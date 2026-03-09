@@ -1,5 +1,4 @@
 'use client'
-
 import {
   CalendarDays,
   Heart,
@@ -8,6 +7,9 @@ import {
   CalendarCheck,
   UserRound,
 } from 'lucide-react'
+import { useSession } from 'next-auth/react'
+import { useQuery } from '@tanstack/react-query'
+import { dashboardKeys, getUserOverview } from '@/lib/queries/dashboard'
 
 type StatCardProps = {
   title: string
@@ -44,6 +46,20 @@ function StatCard({ title, value, icon }: StatCardProps) {
   )
 }
 
+function StatCardSkeleton() {
+  return (
+    <div className="animate-pulse rounded-xl border border-[#EDF1F5] bg-white p-4 shadow-[0_4px_14px_rgba(15,23,42,0.06)]">
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <div className="h-8 w-16 rounded bg-gray-200"></div>
+          <div className="mt-2 h-4 w-24 rounded bg-gray-200"></div>
+        </div>
+        <div className="h-10 w-10 rounded-full bg-gray-200"></div>
+      </div>
+    </div>
+  )
+}
+
 function QuickActionButton({ title, icon, onClick }: ActionItem) {
   return (
     <button
@@ -57,21 +73,37 @@ function QuickActionButton({ title, icon, onClick }: ActionItem) {
   )
 }
 
+function QuickActionSkeleton() {
+  return (
+    <div className="h-10 animate-pulse rounded-md border border-gray-200 bg-gray-100" />
+  )
+}
+
 export default function UserDashboardOverview() {
+  const { data: session } = useSession()
+  const token = session?.user?.accessToken
+  const currentYear = new Date().getFullYear()
+
+  const { data: overviewData, isLoading } = useQuery({
+    queryKey: dashboardKeys.overview(currentYear),
+    queryFn: () => getUserOverview(token),
+    enabled: !!token,
+  })
+
   const topStats = [
     {
       title: 'Saved Properties',
-      value: 12,
+      value: overviewData?.data?.savedProperties ?? 0,
       icon: <Heart className="h-4 w-4" />,
     },
     {
       title: 'Upcoming Site Visits',
-      value: 3,
+      value: overviewData?.data?.upcommingSiteVisit ?? 0,
       icon: <CalendarDays className="h-4 w-4" />,
     },
     {
       title: 'Recent Inquiries',
-      value: 8,
+      value: overviewData?.data?.totalInquiries ?? 0,
       icon: <MessageSquare className="h-4 w-4" />,
     },
   ]
@@ -87,10 +119,6 @@ export default function UserDashboardOverview() {
     },
     {
       title: 'Site visit booked for Penthouse in Westlands',
-      time: '2 hours ago',
-    },
-    {
-      title: 'Saved property for 4 Bedroom Apartment in Kilimani',
       time: '2 hours ago',
     },
   ]
@@ -112,16 +140,20 @@ export default function UserDashboardOverview() {
 
   return (
     <section className="w-full bg-[#F3F5F7]">
-      <div className="mx-auto w-full  px-4 py-6 sm:px-6 lg:px-8">
+      <div className="mx-auto w-full px-4 py-6 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-          {topStats.map(item => (
-            <StatCard
-              key={item.title}
-              title={item.title}
-              value={item.value}
-              icon={item.icon}
-            />
-          ))}
+          {isLoading
+            ? Array(3)
+                .fill(0)
+                .map((_, i) => <StatCardSkeleton key={i} />)
+            : topStats.map(item => (
+                <StatCard
+                  key={item.title}
+                  title={item.title}
+                  value={item.value}
+                  icon={item.icon}
+                />
+              ))}
         </div>
 
         <div className="mt-5 grid grid-cols-1 gap-4 lg:grid-cols-[2fr_1fr]">
@@ -149,13 +181,18 @@ export default function UserDashboardOverview() {
               Quick Actions
             </h2>
             <div className="mt-3 space-y-3">
-              {quickActions.map(item => (
-                <QuickActionButton
-                  key={item.title}
-                  title={item.title}
-                  icon={item.icon}
-                />
-              ))}
+              {isLoading
+                ? Array(3)
+                    .fill(0)
+                    .map((_, i) => <QuickActionSkeleton key={i} />)
+                : quickActions.map(item => (
+                    <QuickActionButton
+                      key={item.title}
+                      title={item.title}
+                      icon={item.icon}
+                      onClick={item.onClick}
+                    />
+                  ))}
             </div>
           </div>
         </div>
