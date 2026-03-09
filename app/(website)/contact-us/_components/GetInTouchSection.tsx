@@ -88,15 +88,14 @@ export function GetInTouchSection() {
       })
 
       setFormData({
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-        message: '',
-      })
-      setAgreed(false)
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        message: "",
+      });
+      setAgreed(false);
+      //eslint-disable-next-line
     } catch (err: any) {
       toast.error(err.message || 'Failed to send message. Please try again.')
       console.error(err)
