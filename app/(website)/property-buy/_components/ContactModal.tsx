@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 import { useState } from "react";
 import { useParams } from "next/navigation";
@@ -7,12 +7,12 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { useSession } from "next-auth/react";
 
 interface ContactModalProps {
-  trigger?: React.ReactNode;
+  trigger?: React.ReactNode
 }
 
 export default function ContactModal({ trigger }: ContactModalProps) {
-  const [open, setOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [open, setOpen] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState({
     email: "",
     phoneNumber: "",
@@ -21,57 +21,57 @@ export default function ContactModal({ trigger }: ContactModalProps) {
 const session=useSession()
 const token=session.data?.user?.accessToken
 
-  const params = useParams();
-  const propertyId = Array.isArray(params?.id) ? params?.id[0] : params?.id;
+  const params = useParams()
+  const propertyId = Array.isArray(params?.id) ? params?.id[0] : params?.id
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+    const { name, value } = e.target
+    setFormData(prev => ({ ...prev, [name]: value }))
+  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault()
 
     if (!propertyId) {
-      toast.error("Property id is missing.");
-      return;
+      toast.error('Property id is missing.')
+      return
     }
-    if (!formData.email.includes("@")) {
-      toast.error("Please enter a valid email address");
-      return;
+    if (!formData.email.includes('@')) {
+      toast.error('Please enter a valid email address')
+      return
     }
     if (!formData.message.trim()) {
-      toast.error("Message cannot be empty");
-      return;
+      toast.error('Message cannot be empty')
+      return
     }
 
-    setIsLoading(true);
+    setIsLoading(true)
 
     
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/contact-property/${propertyId}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/contact-property/${propertyId}`,
         {
-          method: "POST",
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
             email: formData.email.trim(),
             phoneNumber: formData.phoneNumber.trim(),
             message: formData.message.trim(),
           }),
-        }
-      );
+        },
+      )
 
-      const result = await response.json().catch(() => ({}));
+      const result = await response.json().catch(() => ({}))
 
       if (!response.ok) {
-        throw new Error(result.message || "Failed to send message");
+        throw new Error(result.message || 'Failed to send message')
       }
 
       toast.success("Message sent successfully!");
@@ -79,12 +79,12 @@ const token=session.data?.user?.accessToken
       setOpen(false);
       //eslint-disable-next-line
     } catch (err: any) {
-      toast.error(err.message || "Failed to send message. Please try again.");
-      console.error(err);
+      toast.error(err.message || 'Failed to send message. Please try again.')
+      console.error(err)
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -225,11 +225,11 @@ const token=session.data?.user?.accessToken
                 disabled:opacity-70
               "
             >
-              {isLoading ? "Sending..." : "Send Message"}
+              {isLoading ? 'Sending...' : 'Send Message'}
             </button>
           </form>
         </div>
       </DialogContent>
     </Dialog>
-  );
+  )
 }

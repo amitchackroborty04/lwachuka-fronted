@@ -47,7 +47,7 @@ export default function EmailModal({ open, onOpenChange, listing }: EmailModalPr
       phone: string;
     }) => {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/calender/${payload.listingId}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/calender/${payload.listingId}`,
         {
           method: "POST",
           headers: {
