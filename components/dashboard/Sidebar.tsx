@@ -89,22 +89,23 @@ export function Sidebar() {
 
                 {/* Footer section — always pinned at bottom */}
                 <div className="px-3 py-4 shrink-0 gap-3 flex flex-col">
+                    <button
+                        onClick={() => setShowLogoutModal(true)}
+                        className="flex items-center gap-3 px-3 py-3 w-full rounded-lg text-[18px] font-semibold text-red-500 hover:bg-red-50 transition-colors"
+                    >
+                        <LogOut className="h-5 w-5 shrink-0" />
+                        Log Out
+                    </button>
+
                     <Link
                         href="/"
-                        className="flex items-center gap-3 px-3 py-3 w-full rounded-lg text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-900 transition-colors"
+                        className="flex items-center gap-3 px-3 py-3 w-full rounded-lg text-[18px] font-normal text-gray-500 hover:bg-gray-100 hover:text-[#0D1B2A] transition-colors"
                     >
-                        <svg className="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg className="h-5 w-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                         </svg>
                         Back to Homepage
                     </Link>
-                    <button
-                        onClick={() => setShowLogoutModal(true)}
-                        className="flex items-center gap-3 px-3 py-3 w-full rounded-lg text-sm font-semibold text-red-500 hover:bg-red-50 transition-colors"
-                    >
-                        <LogOut className="h-4 w-4 shrink-0" />
-                        Log Out
-                    </button>
                 </div>
             </aside>
 

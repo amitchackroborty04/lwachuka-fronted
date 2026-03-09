@@ -23,6 +23,9 @@ interface PropertyCardProps {
   isAgentView?: boolean;
 }
 
+import { useState } from "react";
+import { DeletePropertyModal } from "@/components/properties/DeletePropertyModal";
+
 export function PropertyCard({
   id,
   image,
@@ -40,12 +43,14 @@ export function PropertyCard({
 }: PropertyCardProps) {
   const router = useRouter();
   const queryClient = useQueryClient();
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const deleteMutation = useMutation({
     mutationFn: (id: string) => deleteProperty(id),
     onSuccess: () => {
       toast.success("Property deleted successfully");
       queryClient.invalidateQueries({ queryKey: propertyKeys.myList() });
+      setShowDeleteModal(false);
     },
     onError: () => toast.error("Failed to delete property"),
   });
@@ -53,9 +58,11 @@ export function PropertyCard({
   const handleDelete = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (window.confirm("Are you sure you want to delete this property? This action cannot be undone.")) {
-      if (id) deleteMutation.mutate(id);
-    }
+    setShowDeleteModal(true);
+  };
+
+  const confirmDelete = () => {
+    if (id) deleteMutation.mutate(id);
   };
 
   return (
@@ -165,6 +172,14 @@ export function PropertyCard({
           </Link>
         )}
       </div>
+
+      <DeletePropertyModal
+        isOpen={showDeleteModal}
+        onClose={() => setShowDeleteModal(false)}
+        onConfirm={confirmDelete}
+        isDeleting={deleteMutation.isPending}
+        title={title}
+      />
     </div>
   );
 }
