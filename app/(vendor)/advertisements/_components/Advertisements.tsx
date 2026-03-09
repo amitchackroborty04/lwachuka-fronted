@@ -327,6 +327,6 @@ export default function AdvertisementManagement() {
           </div>
         </div>
       </div>
-    </div>
+    </div> 
   );
 }
