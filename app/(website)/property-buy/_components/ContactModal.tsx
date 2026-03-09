@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useState } from "react";
+import { useState } from "react";
 import { useParams } from "next/navigation";
 import { toast } from "sonner";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
@@ -18,6 +18,8 @@ export default function ContactModal({ trigger }: ContactModalProps) {
     phoneNumber: "",
     message: "",
   });
+const session=useSession()
+const token=session.data?.user?.accessToken
 
   const params = useParams();
   const propertyId = Array.isArray(params?.id) ? params?.id[0] : params?.id;
@@ -47,10 +49,7 @@ export default function ContactModal({ trigger }: ContactModalProps) {
 
     setIsLoading(true);
 
-    // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5OTZiZjRhNDA1Y2MxYThjNDU4YTM1ZiIsImVtYWlsIjoidXNlckBnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTc3Mjk2ODM4NSwiZXhwIjoxNzczNTczMTg1fQ.bZoc3EWCqSjA1abkwRIAf7Vo-MGltLo_kQxAEiUbS2o"
-    const session = useSession();
-    const token = session.data;
-    console.log(token)
+    
 
     try {
       const response = await fetch(
@@ -78,6 +77,7 @@ export default function ContactModal({ trigger }: ContactModalProps) {
       toast.success("Message sent successfully!");
       setFormData({ email: "", phoneNumber: "", message: "" });
       setOpen(false);
+      //eslint-disable-next-line
     } catch (err: any) {
       toast.error(err.message || "Failed to send message. Please try again.");
       console.error(err);

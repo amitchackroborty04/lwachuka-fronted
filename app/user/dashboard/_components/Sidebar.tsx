@@ -68,7 +68,7 @@ export function Sidebar() {
               alt="Logo"
               width={1000}
               height={1000}
-              className="object-cover w-[120px] h-[75px] "
+              className="object-cover w-[120px] h-[75px] z-50 "
             />
             </Link>
           </div>

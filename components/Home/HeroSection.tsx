@@ -10,8 +10,6 @@ export function HeroSection() {
   const pages = thumbs.map((_, idx) => idx + 1);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const avatars = ['/avater2.png', '/avater2.png', '/avater3.png', '/avater4.png'];
-
 
   return (
     <section className="bg-white">

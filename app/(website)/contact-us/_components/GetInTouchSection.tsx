@@ -92,7 +92,7 @@ export function GetInTouchSection() {
         message: "",
       });
       setAgreed(false);
-
+      //eslint-disable-next-line
     } catch (err: any) {
       toast.error(err.message || "Failed to send message. Please try again.");
       console.error(err);

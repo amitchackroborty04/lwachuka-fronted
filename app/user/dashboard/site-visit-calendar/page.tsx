@@ -36,6 +36,7 @@ type PastVisit = {
 function cn(...classes: Array<string | false | null | undefined>) {
   return classes.filter(Boolean).join(" ");
 }
+console.log(cn)
 
 function StatCard({
   value,
